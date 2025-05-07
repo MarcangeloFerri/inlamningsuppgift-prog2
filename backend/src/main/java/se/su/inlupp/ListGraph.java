@@ -12,14 +12,25 @@ public class ListGraph<T> implements Graph<T> {
 
     @Override
     public void connect(T node1, T node2, String name, int weight) {
+        if(!adjList.containsKey(node1) || !adjList.containsKey(node2)){
+            throw new NoSuchElementException("One or both nodes dont exist");
+        }
         add(node1);
         add(node2);
+
+        if(weight < 0){
+            throw new IllegalArgumentException("Weight can´t be negativ");
+        }
+
+        if(getEdgeBetween(node1, node2) != null){
+            throw new IllegalStateException("A edge already exists");
+        }
 
         Set<Edge<T>> fromNodes = adjList.get(node1);
         Set<Edge<T>> toNodes = adjList.get(node2);
 
-        fromNodes.add(new EdgeClass(node1, name, weight));
-        toNodes.add(new EdgeClass(node2, name, weight));
+        fromNodes.add(new EdgeClass(node2, name, weight));
+        toNodes.add(new EdgeClass(node1, name, weight));
 
     }
 
@@ -71,6 +82,9 @@ public class ListGraph<T> implements Graph<T> {
 
     @Override
     public Edge<T> getEdgeBetween(T node1, T node2) {
+        if(!adjList.containsKey(node1) || !adjList.containsKey(node2)){
+            throw new NoSuchElementException("One or both nodes dont exist");
+        }
         Set<Edge<T>> edges = adjList.get(node1);
         for (Edge e : edges) {
             if (e.getDestination().equals(node2)) {
