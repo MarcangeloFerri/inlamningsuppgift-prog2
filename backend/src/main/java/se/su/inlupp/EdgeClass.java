@@ -3,7 +3,7 @@ package se.su.inlupp;
 import java.util.Objects;
 
 public class EdgeClass<T> implements Edge<T> {
-    private final int weight;
+    private int weight;
     private final String name;
     private final T destination;
 
@@ -26,24 +26,25 @@ public class EdgeClass<T> implements Edge<T> {
     }
 
     public void setWeight(int weight) {
-
+        if (weight < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative");
+        }
+        this.weight = weight;
     }
 
     public boolean equals(Object obj) {
         if(obj instanceof EdgeClass edgeC){
             return destination.equals(edgeC.destination) && name.equals(edgeC.name);
-
-
         }
         return false;
     }
 
-    public int HashCode(){
+    public int hashCode(){
         return Objects.hash(destination, name);
     }
 
     @Override
     public String toString() {
-        return "Edge[destination= "+destination+ ", name= "+name+", weight= "+weight+"]";
+        return "till "+destination+ " med "+name+" tar "+weight;
     }
 }

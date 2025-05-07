@@ -127,6 +127,10 @@ public class ListGraph<T> implements Graph<T> {
 
     @Override
     public boolean pathExists(T from, T to) {
+        if(!adjList.containsKey(from) || !adjList.containsKey(to)) {
+            return false;
+        }
+
         Set<T> visited = new HashSet<>();
         return recursiveVisitAll(from, to, visited);
     }
@@ -150,9 +154,14 @@ public class ListGraph<T> implements Graph<T> {
     public List<Edge<T>> getPath(T from, T to) {
         Map<T, T> connection = new HashMap<>();
         recursiveConnect(from, null, connection);
-        LinkedList<Edge<T>> path = new LinkedList<>();
 
+        if(!connection.containsKey(to)){
+            return null;
+        }
+
+        LinkedList<Edge<T>> path = new LinkedList<>();
         T current = to;
+
         while (current != null && !current.equals(from)) {
             T next = connection.get(current);
             Edge e = getEdgeBetween(next, current);
@@ -161,6 +170,27 @@ public class ListGraph<T> implements Graph<T> {
         }
         return path;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        // First, add all nodes
+        for (T node : adjList.keySet()) {
+            result.append(node).append("\n");
+        }
+
+        // Then add all edges
+        for (T node : adjList.keySet()) {
+            for (Edge<T> edge : adjList.get(node)) {
+                result.append(edge.toString()).append("\n");
+            }
+        }
+
+        return result.toString();
+    }
+
+
 
     private void recursiveConnect(T to, T from, Map<T, T> connection) {
         connection.put(to, from);
