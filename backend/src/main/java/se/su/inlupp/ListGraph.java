@@ -175,12 +175,10 @@ public class ListGraph<T> implements Graph<T> {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        // First, add all nodes
         for (T node : adjList.keySet()) {
             result.append(node).append("\n");
         }
 
-        // Then add all edges
         for (T node : adjList.keySet()) {
             for (Edge<T> edge : adjList.get(node)) {
                 result.append(edge.toString()).append("\n");
@@ -202,34 +200,5 @@ public class ListGraph<T> implements Graph<T> {
 
     }
 
-/*
-    public Collection<Edge> getShortestPath(T from, T to) {
-        Map<T, T> connection = new HashMap<>();
-        connection.put(from, null);
 
-        LinkedList<T> queue = new LinkedList<>();
-        queue.add(from);
-        while (!queue.isEmpty()) {
-            T current = queue.pollFirst();
-            for (Edge<T> e : adjList.get(current)) {
-                T next = e.getDestination();
-                if (!connection.containsKey(next)) {
-                    connection.put(next, current);
-                    queue.add(next);
-                }
-
-            }
-        }
-        LinkedList<Edge<T>> path = new LinkedList<>();
-        T current = to;
-        while(current != null && !current.equals(from)){
-          T next = connection.get(current);
-          Edge<T> e =getEdgeBetween(next, current);
-          current = next;
-          path.addFirst(e);
-        }
-        return null;
-    }
-
-*/
 }
