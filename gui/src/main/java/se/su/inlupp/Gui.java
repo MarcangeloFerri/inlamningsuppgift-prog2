@@ -1,11 +1,13 @@
 package se.su.inlupp;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -30,36 +32,39 @@ public class Gui extends Application {
         Image icon = new Image("icon.png");
         primaryStage.getIcons().add(icon);
         BorderPane root = new BorderPane();
+        VBox vbox = new VBox();
+        root.setTop(vbox);
 
         MenuBar menuBar = createMenuBar();
-        root.setTop(menuBar);
+        vbox.getChildren().add(menuBar);
+
+        FlowPane flowPane = createButtons();
+        vbox.getChildren().add(flowPane);
+        flowPane.setAlignment(Pos.CENTER_LEFT);
+        flowPane.setPadding(new Insets(5));
 
         root.setCenter(imageView);
-
-        HBox buttonsTop = createButtons();
-        root.setCenter(buttonsTop);
-
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private HBox createButtons() {
-        HBox buttonsTop = new HBox();
-        buttonsTop.setAlignment(Pos.BOTTOM_CENTER);
+    private FlowPane createButtons() {
+        FlowPane topButtons = new FlowPane();
+        topButtons.setAlignment(Pos.BOTTOM_CENTER);
         Button findButton = new Button("Find Path");
         Button showButton = new Button("Show Connection");
         Button newPlaceButton = new Button("New Place");
         Button newConnectionButton = new Button("New Connection");
         Button changeConnectionButton = new Button("Change Connection");
 
-        buttonsTop.getChildren().add(findButton);
-        buttonsTop.getChildren().add(showButton);
-        buttonsTop.getChildren().add(newPlaceButton);
-        buttonsTop.getChildren().add(newConnectionButton);
-        buttonsTop.getChildren().add(changeConnectionButton);
+        topButtons.getChildren().add(findButton);
+        topButtons.getChildren().add(showButton);
+        topButtons.getChildren().add(newPlaceButton);
+        topButtons.getChildren().add(newConnectionButton);
+        topButtons.getChildren().add(changeConnectionButton);
 
-        return buttonsTop;
+        return topButtons;
     }
 
     private MenuBar createMenuBar() {
