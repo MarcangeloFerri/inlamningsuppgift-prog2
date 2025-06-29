@@ -71,34 +71,27 @@ public class Gui extends Application {
     }
     private Button styleButtons(String text){
         Button button = new Button(text);
-        button.setStyle(
-                "-fx-background-color: #1565C0;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-family: 'Segoe UI';" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 6;" +
-                        "-fx-padding: 8 16;"
-        );
+        // Ursprunglig stil
+        String baseStyle = "-fx-background-color: #555879;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-family: 'Segoe UI';" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 6;" +
+                "-fx-padding: 8 16;";
 
+        // Hover-stil
+        String hoverStyle = "-fx-background-color: #6F73A8;" +  // lite ljusare
+                "-fx-text-fill: white;" +
+                "-fx-font-family: 'Segoe UI';" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 6;" +
+                "-fx-padding: 8 16;";
 
-        // Hover-effekt (valfritt men snyggt)
-        button.setOnMouseEntered(e -> button.setStyle(
-                "-fx-background-color: #1E88E5;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-family: 'Segoe UI';" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 6;" +
-                        "-fx-padding: 8 16;"
-        ));
+        // Återställ originalstil
+        button.setStyle(baseStyle);
 
-        button.setOnMouseExited(e -> button.setStyle(
-                "-fx-background-color: #1565C0;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-family: 'Segoe UI';" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 6;" +
-                        "-fx-padding: 8 16;"
-        ));
+        button.setOnMouseEntered(e -> button.setStyle(hoverStyle));
+        button.setOnMouseExited(e -> button.setStyle(baseStyle));
 
         return button;
     }
