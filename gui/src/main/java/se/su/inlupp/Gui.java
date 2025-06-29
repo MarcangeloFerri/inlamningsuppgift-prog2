@@ -32,6 +32,7 @@ public class Gui extends Application {
         Image icon = new Image("icon.png");
         primaryStage.getIcons().add(icon);
         BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: #2E2E2E;");
         VBox vbox = new VBox();
         root.setTop(vbox);
 
@@ -52,11 +53,13 @@ public class Gui extends Application {
     private FlowPane createButtons() {
         FlowPane topButtons = new FlowPane();
         topButtons.setAlignment(Pos.BOTTOM_CENTER);
-        Button findButton = new Button("Find Path");
-        Button showButton = new Button("Show Connection");
-        Button newPlaceButton = new Button("New Place");
-        Button newConnectionButton = new Button("New Connection");
-        Button changeConnectionButton = new Button("Change Connection");
+        topButtons.setHgap(5);
+
+        Button findButton =  styleButtons("Find Path");
+        Button showButton =  styleButtons("Show Connection");
+        Button newPlaceButton =  styleButtons("New Place");
+        Button newConnectionButton =  styleButtons("New Connection");
+        Button changeConnectionButton =  styleButtons("Change Connection");
 
         topButtons.getChildren().add(findButton);
         topButtons.getChildren().add(showButton);
@@ -66,6 +69,40 @@ public class Gui extends Application {
 
         return topButtons;
     }
+    private Button styleButtons(String text){
+        Button button = new Button(text);
+        button.setStyle(
+                "-fx-background-color: #1565C0;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-family: 'Segoe UI';" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 6;" +
+                        "-fx-padding: 8 16;"
+        );
+
+
+        // Hover-effekt (valfritt men snyggt)
+        button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-background-color: #1E88E5;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-family: 'Segoe UI';" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 6;" +
+                        "-fx-padding: 8 16;"
+        ));
+
+        button.setOnMouseExited(e -> button.setStyle(
+                "-fx-background-color: #1565C0;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-font-family: 'Segoe UI';" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-background-radius: 6;" +
+                        "-fx-padding: 8 16;"
+        ));
+
+        return button;
+    }
+
 
     private MenuBar createMenuBar() {
         Menu menu = new Menu("File");
@@ -116,6 +153,13 @@ public class Gui extends Application {
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+
+      //Detta anväder vi för att öppna resource mapen
+        File startFolder = new File((System.getProperty("user.home")), "Pictures");
+      if (startFolder.exists()) {
+          fileChooser.setInitialDirectory(startFolder);
+      }
+
         fileChooser.setTitle("Select map");
         File file = fileChooser.showOpenDialog(stage);
         if(file != null){
