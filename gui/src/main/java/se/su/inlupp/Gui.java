@@ -14,17 +14,19 @@ import javafx.scene.image.Image;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 public class Gui extends Application {
-    private Graph<String> graph = new ListGraph<String>();
+    private Graph<Place> graph = new ListGraph<>();
     private Stage stage;
+    private BorderPane root;
     private FileChooser fileChooser = new FileChooser();
     private Map<String, String> maps = new HashMap<>();
     private final ImageView imageView = new ImageView();
     private Pane center;
-    private String from;
-    private String to;
+    private Place from;
+    private Place to;
     private boolean changed;
 
 
@@ -139,22 +141,79 @@ public class Gui extends Application {
         return menuBar;
     }
 
-    private void loadGraphFile(File file) {
-        // Här implementerar du laddning av graf-fil senare
-        // För nu bara testa att fildialogen fungerar
-    }
-
     private void handleOpen() {
+
+        if(changed){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Unsaved changes, do you wish to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+                if(result.isPresent() && !result.get().equals(ButtonType.OK)){
+                    return;
+
+                }
+        }
+
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Graph Files", "*.graph")
         );
+        File startFolder = new File("C:\\Users\\marck\\Desktop\\DSV matrial\\Prog2\\Inlämningsuppgiften\\gui\\src\\main\\resources");
+        if (startFolder.exists()) {
+            fileChooser.setInitialDirectory(startFolder);
+        }
         fileChooser.setTitle("Open Graf file");
 
         File file = fileChooser.showOpenDialog(stage);
+        String fileName = file.getName();
         if (file != null) {
-            loadGraphFile(file);
+            openGraph(fileName);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("File " + fileName + " not found");
+            alert.showAndWait();
         }
+    }
+
+    private void openGraph(String fileName){
+        try{
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            graph = new ListGraph<>();
+            center = new Pane();
+            center.setId("Output area");
+            center.getChildren().clear();
+
+            from = null;
+            to = null;
+
+            Image image = new Image(bufferedReader.readLine());
+            imageView.setImage(image);
+            center.getChildren().add(imageView);
+
+            root.setCenter(center);
+            stage.setWidth(image.getWidth());
+            stage.setHeight(image.getHeight());
+            stage.centerOnScreen();
+
+            String line = bufferedReader.readLine();
+            String[] split = line.split(";");
+
+            HashMap<String, Place> places = new HashMap<>();
+
+            for(){
+
+            }
+
+        }catch(FileNotFoundException e){
+
+        }catch(IOException e){
+
+        }
+
     }
 
     private void handleNewMap() {
