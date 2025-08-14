@@ -1,0 +1,16 @@
+C:\Users\marck\Desktop\DSV matrial\Prog2\Inlämningsuppgiften\gui\src\main\resources\europa.gif
+HAM;452;384;ROM;428;588;Hel;582;234;Sthlm;511;261;KÖP;447;319;LOND;290;378;Oslo;440;238;
+HAM;ROM;e7;18
+HAM;LOND;e18;8
+HAM;KÖP;e6;7
+ROM;LOND;bland;24
+ROM;HAM;e7;18
+Hel;Sthlm;Båt;2
+Sthlm;Oslo;e4;4
+Sthlm;Hel;Båt;2
+Sthlm;KÖP;e4;7
+KÖP;Sthlm;e4;7
+KÖP;HAM;e6;7
+LOND;ROM;bland;24
+LOND;HAM;e18;8
+Oslo;Sthlm;e4;4

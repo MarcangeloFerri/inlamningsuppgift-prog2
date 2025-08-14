@@ -1,0 +1,18 @@
+C:\Users\marck\Desktop\DSV matrial\Prog2\Inlämningsuppgiften\gui\src\main\resources\europa.gif
+PAR;305;432;ROM;429;591;STO;510;259;SIS;441;707;LON;287;377;BER;452;384;MAD;182;573;Sia;362;634;e14;184;571;BRY;339;401;
+PAR;LON;tunnel;2
+PAR;ROM;car;14
+PAR;BRY;e4;1
+PAR;e14;e14;14
+ROM;SIS;bot;4
+ROM;BER;car;9
+ROM;PAR;car;14
+STO;BER;plane;2
+SIS;ROM;bot;4
+SIS;Sia;båt;3
+LON;PAR;tunnel;2
+BER;ROM;car;9
+BER;STO;plane;2
+Sia;SIS;båt;3
+e14;PAR;e14;14
+BRY;PAR;e4;1

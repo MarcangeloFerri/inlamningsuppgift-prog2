@@ -1,3 +1,8 @@
+// PROG2 VT2025, Inlämningsuppgift, del 1
+// Grupp 045
+// MarcAngelo Ferri mafe1831
+// Simon Sundvisson sisu5284
+
 package se.su.inlupp;
 
 import java.util.Objects;
@@ -33,18 +38,18 @@ public class EdgeClass<T> implements Edge<T> {
     }
 
     public boolean equals(Object obj) {
-        if(obj instanceof EdgeClass edgeC){
+        if (obj instanceof EdgeClass edgeC) {
             return destination.equals(edgeC.destination) && name.equals(edgeC.name);
         }
         return false;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(destination, name);
     }
 
     @Override
     public String toString() {
-        return "till "+destination+ " med "+name+" tar "+weight;
+        return "till " + destination + " med " + name + " tar " + weight;
     }
 }
