@@ -29,7 +29,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
-//HEj
 
 public class Gui extends Application {
     private Graph<Place> graph = new ListGraph<>();
@@ -51,7 +50,6 @@ public class Gui extends Application {
     private Button newConnectionButton;
     private Button changeConnectionButton;
 
-// Lägga: Knappar skall aktiveras igen (gäoras ”enabled”).
 
     public void start(Stage primaryStage) {
         stage = primaryStage;
